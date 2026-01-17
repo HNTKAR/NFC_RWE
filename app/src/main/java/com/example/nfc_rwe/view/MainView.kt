@@ -1,4 +1,4 @@
-package com.example.nfc_rwe
+package com.example.nfc_rwe.view
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -10,17 +10,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.nfc_rwe.viewmodel.MainViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.nfc_rwe.model.AppRole
-
+import com.example.nfc_rwe.model.AppRoleModel
+import com.example.nfc_rwe.viewmodel.AppRoleViewModel
 
 class MainView() {
     @Composable
     fun Main() {
-        val vm: MainViewModel = viewModel()
+        val vm: AppRoleViewModel = viewModel()
         val mode by vm.mode.collectAsStateWithLifecycle()
-        Scaffold(bottomBar = { BottomBar() }) { innerPadding ->
+        Scaffold(bottomBar = { BottomBar(vm, mode) }) { innerPadding ->
             Text(
                 text = mode.context,
                 modifier = Modifier.padding(innerPadding),
@@ -29,11 +28,9 @@ class MainView() {
     }
 
     @Composable
-    private fun BottomBar() {
-        val vm: MainViewModel = viewModel()
-        val mode by vm.mode.collectAsStateWithLifecycle()
+    private fun BottomBar(vm: AppRoleViewModel, mode: AppRoleModel) {
         NavigationBar {
-            AppRole.entries.forEach { item ->
+            vm.getModeList().forEach { item ->
                 NavigationBarItem(
                     icon = { Icon(item.icon, contentDescription = item.name) },
                     label = { Text(item.name) },
