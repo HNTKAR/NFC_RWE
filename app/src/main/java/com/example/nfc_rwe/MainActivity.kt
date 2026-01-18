@@ -13,8 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NFC_RWETheme {
-                val ma = MainView()
-                ma.Main()
+                MainView()
             }
         }
     }

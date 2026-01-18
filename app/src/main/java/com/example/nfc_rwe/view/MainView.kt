@@ -14,30 +14,25 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.nfc_rwe.model.AppRoleModel
 import com.example.nfc_rwe.viewmodel.AppRoleViewModel
 
-class MainView() {
-    @Composable
-    fun Main() {
-        val vm: AppRoleViewModel = viewModel()
-        val mode by vm.mode.collectAsStateWithLifecycle()
-        Scaffold(bottomBar = { BottomBar(vm, mode) }) { innerPadding ->
-            Text(
-                text = mode.context,
-                modifier = Modifier.padding(innerPadding),
-            )
-        }
+@Composable
+fun MainView() {
+    val vm: AppRoleViewModel = viewModel()
+    val mode by vm.mode.collectAsStateWithLifecycle()
+    Scaffold(bottomBar = { BottomBar(vm, mode) }) { innerPadding ->
+        ReadViewMain(Modifier.padding(innerPadding))
     }
+}
 
-    @Composable
-    private fun BottomBar(vm: AppRoleViewModel, mode: AppRoleModel) {
-        NavigationBar {
-            vm.getModeList().forEach { item ->
-                NavigationBarItem(
-                    icon = { Icon(item.icon, contentDescription = item.name) },
-                    label = { Text(item.name) },
-                    selected = mode == item,
-                    onClick = { vm.setMode(item) }
-                )
-            }
+@Composable
+private fun BottomBar(vm: AppRoleViewModel, mode: AppRoleModel) {
+    NavigationBar {
+        vm.getModeList().forEach { item ->
+            NavigationBarItem(
+                icon = { Icon(item.icon, contentDescription = item.name) },
+                label = { Text(item.name) },
+                selected = mode == item,
+                onClick = { vm.setMode(item) }
+            )
         }
     }
 }
