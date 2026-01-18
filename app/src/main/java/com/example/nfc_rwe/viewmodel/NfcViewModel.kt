@@ -18,7 +18,7 @@ class NfcViewModel(private val nr: NdefRepository = NdefRepository()) : ViewMode
     private val _cardInfo = MutableStateFlow("")
     val cardInfo: StateFlow<String> = _cardInfo.asStateFlow()
 
-    fun getCardData(tag: Tag) {
+    fun getCardAllData(tag: Tag) {
         viewModelScope.launch {
             nr.getData(tag).collect {
                 _cardInfo.value = tagIndex
@@ -41,7 +41,7 @@ class NfcViewModel(private val nr: NdefRepository = NdefRepository()) : ViewMode
     fun read(tag: Tag) {
         val tag = tag
         nfcDebug(tag)
-        getCardData(tag)
+        getCardAllData(tag)
     }
 
     private fun format(tag: Tag) {

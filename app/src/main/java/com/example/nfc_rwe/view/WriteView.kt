@@ -1,8 +1,8 @@
 package com.example.nfc_rwe.view
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -12,16 +12,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.nfc_rwe.viewmodel.NfcViewModel
 
+
 @Composable
-fun ReadView(modifier: Modifier = Modifier, nvm: NfcViewModel= viewModel()) {
-    val nvm: NfcViewModel = viewModel()
+fun WriteView(modifier: Modifier = Modifier, nvm: NfcViewModel = viewModel()) {
     val cardInfo by nvm.cardInfo.collectAsStateWithLifecycle()
 
     Column(
@@ -29,21 +28,22 @@ fun ReadView(modifier: Modifier = Modifier, nvm: NfcViewModel= viewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Read Mode", fontSize = 30.sp, color = Color.Green)
-        TextField(
-            modifier = Modifier.fillMaxWidth(),
-            minLines = 4,
-            maxLines = 4,
-            value = cardInfo,
-            onValueChange = { },
-            readOnly = true
-        )
+        Text("Write Mode", fontSize = 30.sp, color = Color.Red)
+        Row {
+            Text("URL")
+            TextField(
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                value = cardInfo,
+                onValueChange = { }
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-fun ReadViewPreview() {
-    ReadView()
+fun WriteViewPreview() {
+    WriteView()
 }
 

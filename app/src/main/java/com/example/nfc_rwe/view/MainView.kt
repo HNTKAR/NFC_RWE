@@ -19,7 +19,10 @@ fun MainView() {
     val vm: AppRoleViewModel = viewModel()
     val mode by vm.mode.collectAsStateWithLifecycle()
     Scaffold(bottomBar = { BottomBar(vm, mode) }) { innerPadding ->
-        ReadViewMain(Modifier.padding(innerPadding))
+        RWViewMain(
+            Modifier.padding(innerPadding),
+//            data = { data1, data3 -> ReadView(data1, data3) })
+            data = { data1, data3 -> WriteView(data1, data3) })
     }
 }
 
@@ -28,8 +31,8 @@ private fun BottomBar(vm: AppRoleViewModel, mode: AppRoleModel) {
     NavigationBar {
         vm.getModeList().forEach { item ->
             NavigationBarItem(
-                icon = { Icon(item.icon, contentDescription = item.name) },
-                label = { Text(item.name) },
+                icon = { Icon(item.icon, contentDescription = item.context) },
+                label = { Text(item.context) },
                 selected = mode == item,
                 onClick = { vm.setMode(item) }
             )

@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class NdefRepository {
-
-
     fun getData(tag: Tag): Flow<List<NdefModel>> = flow {
         val ndef = Ndef.get(tag)
         if (ndef != null) {
