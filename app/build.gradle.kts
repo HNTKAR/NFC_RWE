@@ -61,7 +61,7 @@ dependencies {
 }
 dependencies {
 
-    // ViewModel
+    implementation(libs.androidx.material3)// ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // ViewModel utilities for Compose
     implementation(libs.androidx.lifecycle.viewmodel.compose)

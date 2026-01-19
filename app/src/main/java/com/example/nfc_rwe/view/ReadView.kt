@@ -35,7 +35,7 @@ fun ReadView(modifier: Modifier = Modifier, nvm: NfcViewModel= viewModel()) {
             minLines = 4,
             maxLines = 4,
             value = cardInfo,
-            onValueChange = { },
+            onValueChange = {},
             readOnly = true
         )
     }
